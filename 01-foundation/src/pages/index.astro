@@ -1,19 +1,38 @@
 ---
-// server only variables
+import MainLayout from "../layouts/MainLayouts.astro";
+
+// Variables definidas en el servidor antes de renderizar la página.
 const name = "Roberto Flores";
-const title = "Hola Mundo";
+const title = "Home Page";
+const currentDate = new Date();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<p>Hola {name}</p>
-	</body>
-</html>
+<MainLayout title={title}>
+  <!-- Título principal visible en la página -->
+  <h1>{name}</h1>
+
+  <!-- Este valor se calcula al renderizar el servidor -->
+  <p>Momento actual: {currentDate.toLocaleTimeString()}</p>
+
+  <!-- Este texto se actualiza desde JavaScript cuando la página carga -->
+  <p id="current-time">Momento actual real:</p>
+
+  <script>
+    // Buscamos el párrafo para escribir la hora actual del cliente.
+    const currentTimeParagraph = document.querySelector(
+      "#current-time",
+    ) as HTMLParagraphElement | null;
+
+    // Función que actualiza la hora real del cliente en pantalla.
+    const updateCurrentTime = () => {
+      // Si el párrafo existe, escribimos la hora dentro.
+      if (currentTimeParagraph) {
+        currentTimeParagraph.textContent = `Momento actual real: ${new Date().toLocaleTimeString()}`;
+      }
+    };
+
+    // Mostramos la hora al cargar y luego la refrescamos cada segundo.
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+  </script>
+</MainLayout>
