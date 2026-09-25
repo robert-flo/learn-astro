@@ -1,17 +1,9 @@
 ---
-
+// Layout compartido: incluye el menú, los estilos y el título de la pestaña.
+import MainLayouts from "../layouts/MainLayouts.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
-	</head>
-	<body>
-		<h1>About</h1>
-	</body>
-</html>
+<MainLayouts title="Abouts Page">
+  <!-- Título principal visible en la página -->
+  <h1>About</h1>
+</MainLayouts>
