@@ -1,0 +1,29 @@
+---
+import Navbar from "../components/Navbar.astro";
+import "../styles/global.css";
+
+// Datos que cada página debe enviar a este layout.
+interface Props {
+  title: string;
+}
+
+// Título que la página pasa para mostrarlo en la pestaña del navegador.
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Título de la pestaña, recibido desde la página -->
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar />
+    <!-- Aquí aparece el contenido propio de cada página -->
+    <slot />
+  </body>
+</html>
